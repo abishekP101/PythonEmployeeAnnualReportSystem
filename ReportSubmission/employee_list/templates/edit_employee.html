@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Employee</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e0eafc, #cfdef3);
+            font-family: 'Arial', sans-serif;
+        }
+        .navbar {
+            background: linear-gradient(45deg, #6a9fb5, #1f3b4d);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand {
+            font-weight: bold;
+            color: #fff;
+            font-size: 1.5rem;
+        }
+        .navbar-nav .nav-link {
+            color: #fff;
+            font-size: 1.1rem;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #1f3b4d;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: linear-gradient(145deg, #f6f9fd, #e4ebf5);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .btn-save {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        .btn-save:hover {
+            background-color: #218838;
+        }
+        .btn-back {
+            margin-top: 20px;
+            font-size: 1rem;
+            padding: 8px 16px;
+            border-radius: 5px;
+            background-color: #33b5e5;
+            border: none;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .btn-back:hover {
+            background-color: #259ac0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Employee Portal</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'submit_annual_report' %}">Submit Annual Report</a>
+                </li>
+                {% if user.is_superuser %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'employee_list' %}">Employee List</a>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link btn btn-danger btn-sm text-white" href="{% url 'logout' %}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Edit Employee Section -->
+    <div class="container">
+        <h2 class="h2">Edit Employee: {{ employee.name }}</h2>
+
+        <div class="card">
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}  <!-- Render the form fields -->
+
+                    <button type="submit" class="btn-save">Save Changes</button>
+                </form>
+
+                <p><a href="{% url 'employee_list' %}" class="btn btn-back">Back to Employee List</a></p>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

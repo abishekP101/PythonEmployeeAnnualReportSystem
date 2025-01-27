@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - National Informatics Center Gangtok, Sikkim</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 500px;
+            margin-top: 50px;
+        }
+
+        .form-container {
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #ffffff;
+        }
+
+        .btn-register {
+            background-color: #333;
+            color: white;
+        }
+
+        .btn-register:hover {
+            background-color: #000;
+        }
+
+        h2,
+        .nic-title {
+            color: #333;
+        }
+
+        .nic-title {
+            font-size: 18px;
+            margin-bottom: 30px;
+            font-weight: bold;
+            text-align: center;
+            color: #666;
+        }
+
+        .text-center a {
+            color: #333;
+        }
+
+        .text-center a:hover {
+            color: #000;
+        }
+
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Registration Page -->
+    <div class="container">
+        <div class="nic-title">National Informatics Center<br>Gangtok, Sikkim</div>
+
+        <div class="form-container">
+            <h2 class="text-center">Register</h2>
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="{{ form.username.id_for_label }}">Username</label>
+                    {{ form.username }}
+                    {% for error in form.username.errors %}
+                    <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.password1.id_for_label }}">Password</label>
+                    {{ form.password1 }}
+                    {% for error in form.password1.errors %}
+                    <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+                    {{ form.password2 }}
+                    {% for error in form.password2.errors %}
+                    <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <button type="submit" class="btn btn-register btn-block">Register</button>
+            </form>
+
+            <p class="text-center mt-3">Already have an account? <a href="{% url 'login' %}">Login here</a>.</p>
+        </div>
+
+        <div class="footer">
+            &copy; 2025 National Informatics Center, Gangtok, Sikkim. All rights reserved.
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

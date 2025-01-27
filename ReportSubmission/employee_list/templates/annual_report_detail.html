@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annual Report Detail</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #dce2f0, #bfc8e2);
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #3c4f65;
+            margin-bottom: 30px;
+        }
+        .report-details {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        .report-details div {
+            font-size: 1.1rem;
+            color: #596a76;
+            margin-bottom: 15px;
+        }
+        .report-details ul {
+            font-size: 1.1rem;
+            color: #596a76;
+            margin-left: 20px;
+        }
+        .btn-primary {
+            background-color: #1a73e8;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+        }
+        .btn-primary:hover {
+            background-color: #155bb5;
+            transform: translateY(-2px);
+        }
+        .back-button {
+            margin-top: 30px;
+            display: block;
+            text-align: center;
+        }
+        .score-form {
+            margin-top: 20px;
+        }
+        .score-form h4 {
+            color: #3c4f65;
+        }
+        .score-form .form-group label {
+            font-weight: 600;
+            color: #3c4f65;
+        }
+        .score-form input[type="number"] {
+            font-size: 1.1rem;
+            padding: 10px;
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Annual Report for {{ report.employee.name }} - {{ report.year }}</h2>
+
+        <div class="report-details">
+            <div><strong>Status:</strong>
+                {% if report.status == 'Viewed' %}
+                    Score: {{ report.score }}
+                {% else %}
+                    Pending
+                {% endif %}
+            </div>
+            <div><strong>Report:</strong> {{ report.report }}</div>
+            <div><strong>Brief Description of Duties:</strong> {{ report.duties_description }}</div>
+            <div><strong>Brief Description about the Program/Projects/Field Study:</strong> {{ report.program_description }}</div>
+            <div><strong>Your Achievement (in 100 words):</strong> {{ report.achievement_description }}</div>
+            <div><strong>Publications/Reports/Technology Transferred/Patents Filed:</strong> {{ report.publications_description }}</div>
+            <div><strong>Contributions to Government Missions (e.g., Atma Nirbhar Bharat, Make in India, etc.):</strong></div>
+            <ul>
+                {% for item in report.contribution_description.splitlines %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        {% if user.is_superuser and report.status != 'Viewed' %}
+            <div class="score-form">
+                <h4>Provide Score (1-10)</h4>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="score">Score (1-10):</label>
+                        <input type="number" name="score" id="score" class="form-control" min="1" max="10" required
+                               oninvalid="this.setCustomValidity('Please enter a score between 1 and 10')"
+                               oninput="setCustomValidity('')">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Score</button>
+                </form>
+            </div>
+        {% endif %}
+
+        <div class="back-button">
+            <a href="{% url 'home' %}" class="btn btn-primary">Home</a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

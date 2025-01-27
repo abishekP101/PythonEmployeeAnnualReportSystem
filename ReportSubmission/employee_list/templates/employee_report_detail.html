@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annual Report Detail</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f0f8ff, #e6e6fa);
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .report-details {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+        .report-details p, .report-details ul {
+            font-size: 1rem;
+            color: #4b4b4b;
+        }
+        .back-button {
+            text-align: right;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Annual Report for {{ report.employee.name }} - {{ report.year }}</h2>
+
+        <div class="report-details">
+            <p><strong>Status:</strong> {{ report.get_status_display }}</p>
+            <p><strong>Report:</strong> {{ report.report }}</p>
+            <p><strong>Brief Description of Duties:</strong> {{ report.duties_description }}</p>
+            <p><strong>Brief Description about the Program/Projects/Field Study:</strong> {{ report.program_description }}</p>
+            <p><strong>Your Achievement (in 100 words):</strong> {{ report.achievement_description }}</p>
+            <p><strong>Publications/Reports/Technology Transferred/Patents Filed:</strong> {{ report.publications_description }}</p>
+            <p><strong>Contributions to Government Missions (e.g., Atma Nirbhar Bharat, Make in India, etc.):</strong></p>
+            <ul>
+                {% for item in report.contribution_description.splitlines %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+            <p><strong>Score:</strong> {{ score if score else 'Pending' }}</p> <!-- Display score or "Pending" -->
+        </div>
+
+        <div class="back-button">
+            <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

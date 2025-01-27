@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Employee Portal for managing account, reports, and more">
+    <title>Employee Portal - Home</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #003366; /* Navy Blue */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand {
+            font-weight: bold;
+            color: #ffffff;
+            font-size: 1.8rem;
+        }
+        .navbar-nav .nav-link {
+            color: #ffffff;
+            font-size: 1.1rem;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            background-color: #003366;
+            padding-top: 60px;
+            transition: 0.4s;
+        }
+        .sidebar a {
+            padding: 10px 15px;
+            font-size: 1.2rem;
+            color: #ffffff;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+        .sidebar a:hover {
+            background-color: #00509E;
+        }
+        .closebtn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 36px;
+            color: #ffffff;
+        }
+              /* Report Section */
+        /* For the side-by-side layout of Report Status and Logout */
+         .report-card, .card {
+          border-radius: 12px;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+          padding: 20px;
+}
+
+/* Ensure the cards are responsive */
+@media (min-width: 768px) {
+    .report-card, .card {
+        margin-top: 20px;
+    }
+}
+
+        .report-status {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+           .view-report-btn {
+            background-color: #17a2b8;
+            border: none;
+            padding: 10px 20px;
+            color: white;
+            border-radius: 5px;
+        }
+        .view-report-btn:hover {
+            background-color: #138496;
+        }
+
+        /* Hamburger Icon */
+        .hamburger {
+            font-size: 30px;
+            cursor: pointer;
+            color: #ffffff;
+            padding: 15px;
+        }
+
+        /* Main content */
+        .main-content {
+            margin-left: 0;
+            padding: 20px;
+            transition: margin-left 0.4s;
+        }
+        @media (min-width: 768px) {
+            .main-content {
+                margin-left: 60px;
+            }
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(90deg, #003366, #00509E);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+        }
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+        .hero-section p {
+            font-size: 1.5rem;
+            margin: 20px 0;
+        }
+        .hero-section .btn-primary {
+            background-color: #ff4500;
+            border: none;
+            font-size: 1.2rem;
+            padding: 15px 30px;
+        }
+        .hero-section .btn-primary:hover {
+            background-color: #d83700;
+        }
+
+        /* Cards and Buttons */
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        .card-body {
+            text-align: center;
+        }
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #003366;
+        }
+        .btn-primary {
+            background-color: #00509E;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #003366;
+        }
+
+        /* Advertisement Images Section */
+        .advertisement-section {
+            margin-top: 50px;
+        }
+        .advertisement-section img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Government Links Section */
+        .gov-links {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .gov-links a {
+            margin: 10px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            color: #003366;
+            transition: color 0.3s ease;
+        }
+        .gov-links a:hover {
+            color: #ff4500;
+        }
+
+        /* Calendar Styling */
+        table.table-bordered {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem; /* Reduced size */
+        }
+
+        table.table-bordered th,
+        table.table-bordered td {
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        thead.thead-dark th {
+            background-color: #003366;
+            color: #ffffff;
+        }
+
+        .gazetted {
+            background-color: #ffcccc;
+        }
+
+        .restricted {
+            background-color: #ffe6cc;
+        }
+
+        .weekly {
+            background-color: #e6f7ff;
+        }
+
+        .vacation {
+            background-color: #ccffe6;
+        }
+
+        /* Address Card */
+        .address-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .address-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .address-card a {
+            color: #00509E;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .address-card a:hover {
+            text-decoration: underline;
+        }
+        /* Styling for Address Card */
+  .address-card {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Custom mat-card styling */
+  .custom-card {
+    display: flex;
+    flex-direction: row; /* Align content side by side */
+    align-items: center; /* Vertically center the content */
+    justify-content: space-between; /* Space between content and image */
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Shadow effect */
+    background-color: white;
+  }
+
+  .card-content {
+    flex: 1; /* Take up remaining space */
+  }
+  .card-image img {
+  width: 250px; /* Adjust size of the image */
+  height: 250px; /* Adjust height of the image */
+  object-fit: cover; /* Maintain aspect ratio and cover area */
+  border-radius: 5px; /* Optional: Rounded corners for the image */
+}
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div id="mySidebar" class="sidebar" aria-labelledby="sidebarMenu">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" aria-label="Close">&times;</a>
+        <a href="#" aria-label="Home">Home</a>
+        <a href="{% url 'submit_annual_report' %}" aria-label="Submit Annual Report">Submit Annual Report</a>
+        {% if user.is_superuser %}
+        <a href="{% url 'employee_list' %}" aria-label="Employee List">Employee List</a>
+        <a href="{% url 'annual_reports_list' %}" aria-label="View Annual Reports">View Annual Reports</a>
+        {% endif %}
+        <a href="{% url 'logout' %}" class="btn btn-danger" aria-label="Logout">Logout</a>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark">
+        <span class="hamburger" onclick="openNav()" aria-label="Open Sidebar">&#9776;</span>
+        <a class="navbar-brand" href="#">Employee Portal</a>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section" id="hero-section">
+            <div class="container">
+                <img src="https://cdn.pixabay.com/photo/2017/01/31/23/53/parliament-2028311_1280.png"
+                     alt="Vidhana Soudha Bangalore"
+                     class="img-fluid mb-4"
+                     style="max-height: 200px; width: auto; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);">
+
+                <h1>Welcome, {{ user.username }}!</h1>
+                <p>Your one-stop platform for managing your account, reports, and more.</p>
+                <a href="#features" class="btn btn-primary" aria-label="Explore Features">Explore Features</a>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <div class="container mt-5" id="features">
+            <div class="row">
+                {% if user.is_superuser %}
+                <!-- Superuser specific cards -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Employee List</h5>
+                            <a href="{% url 'employee_list' %}" class="btn btn-primary" aria-label="Employee List">View Employees</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">View Annual Reports</h5>
+                            <a href="{% url 'annual_reports_list' %}" class="btn btn-primary" aria-label="View Annual Reports">View Reports</a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Submit Report - Only for employees who have not submitted the report -->
+                {% if user.is_authenticated and not user.is_superuser and not user.employee.report %}
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Submit Report</h5>
+                            <a href="{% url 'submit_annual_report' %}" class="btn btn-primary" aria-label="Submit Annual Report">Submit Report</a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                           <!-- Report Status for Employees -->
+           <!-- Report Status and Logout Side by Side -->
+{% if user.employee and user.employee.report %}
+<div class="container mt-5">
+    <div class="row">
+        <!-- Report Status Card -->
+        <div class="col-md-6">
+            <div class="report-card">
+                <h5>Your Annual Report Status</h5>
+                <p class="report-status">
+                    {% if user.employee.report.status == "pending" %}
+                        <span class="text-warning">Pending</span>
+                    {% else %}
+                        <span class="text-success">Viewed</span> - Score: {{ user.employee.report.score }}
+                    {% endif %}
+                </p>
+                <a href="{% url 'annual_report_detail' user.employee.report.id %}" class="view-report-btn">View My Report</a>
+            </div>
+        </div>
+
+        <!-- Logout Card -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Logout</h5>
+                    <a href="{% url 'logout' %}" class="btn btn-danger" aria-label="Logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+ <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Logout</h5>
+                    <a href="{% url 'logout' %}" class="btn btn-danger" aria-label="Logout">Logout</a>
+                </div>
+            </div>
+        </div>
+{% endif %}
+
+        <!-- Calendar Section -->
+        <div class="container mt-5">
+            <h2 class="text-center">Calendar</h2>
+            <div id="calendar" class="mt-4"></div>
+        </div>
+
+<div class="container mt-5">
+    <div class="row">
+        <!-- Address Card on the Left -->
+        <div class="col-md-6">
+            <div class="address-card">
+                <h4>Address</h4>
+                <p>National Informatics Centre Sikkim</p>
+                <p>Tashiling Secretariat, Gangtok, PIN 737103</p>
+                <p>Sikkim</p>
+                <a href="https://www.google.com/maps?q=National+Informatics+Centre+Sikkim,+Tashiling+Secretariat,+Gangtok,+PIN+737103,+Sikkim"
+                   target="_blank" aria-label="View on Google Maps">View on Google Maps</a>
+            </div>
+        </div>
+
+        <!-- mat-card with Image on the Right -->
+        <div class="col-md-6">
+            <mat-card class="custom-card">
+                <div class="card-content">
+                    <h2>NIC</h2>
+                    <p>Gangtok,East Sikkim</p>
+                </div>
+                <div class="card-image">
+                    <img src="https://cdnbbsr.s3waas.gov.in/s36f4920ea25403ec77bee9efce43ea25e/uploads/bfi_thumb/2020011416-qbbwnkubd0t7gvoesxkzuro44pmx870tfo9pchglae.jpg" alt="Card Image">
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div>
+
+<!-- Add this CSS to your component -->
+        <!-- Government Links Section -->
+        <div class="gov-links">
+            <h4>Important Government Links</h4>
+            <a href="http://sikkim.gov.in" target="_blank">Sikkim Government Portal</a>
+            <a href="https://sikkim.nic.in" target="_blank">NIC SIKKIM</a>
+            <a href="http://education.sikkim.gov.in" target="_blank">Sikkim Education Department</a>
+        </div>
+    </div>
+
+    <!-- JavaScript for Sidebar -->
+    <script>
+        function openNav() {
+            document.getElementById("mySidebar").style.left = "0";
+            document.querySelector(".main-content").style.marginLeft = "250px";
+        }
+        function closeNav() {
+            document.getElementById("mySidebar").style.left = "-250px";
+            document.querySelector(".main-content").style.marginLeft = "0";
+        }
+
+        // Dynamic Calendar
+        const specialDays = {
+            "1": { type: "gazetted", description: "New Year's Day" },
+            "15": { type: "restricted", description: "Pongal" },
+            "22": { type: "weekly", description: "Weekly Off" },
+            "25": { type: "vacation", description: "Winter Vacation" }
+        };
+
+        // Add the month names array
+const monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+];
+
+// Modify the generateCalendar function to display the month name
+function generateCalendar() {
+    const calendarContainer = document.getElementById("calendar");
+    const currentDate = new Date();
+    const month = currentDate.getMonth();
+    const year = currentDate.getFullYear();
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    // Display the month and year at the top of the calendar
+    let calendarHTML = `<h3 class="text-center">${monthNames[month]} ${year}</h3>`;
+
+    // Calendar table
+    calendarHTML += `<table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Sun</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+            </tr>
+        </thead>
+        <tbody><tr>`;
+
+    for (let i = 0; i < firstDay; i++) {
+        calendarHTML += "<td></td>"; // Empty cells before the first day
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dayOfWeek = (firstDay + day - 1) % 7;
+        const specialDay = specialDays[day];
+        const dayClass = specialDay ? specialDay.type : "";
+
+        calendarHTML += `
+            <td class="${dayClass}">
+                <span>${day}</span>
+                ${specialDay ? `<br><small>${specialDay.description}</small>` : ""}
+            </td>`;
+
+        if (dayOfWeek === 6) {
+            calendarHTML += "</tr><tr>"; // Start new row for the next week
+        }
+    }
+
+    calendarHTML += "</tr></tbody></table>";
+    calendarContainer.innerHTML = calendarHTML;
+}
+
+// Initialize calendar
+generateCalendar();
+
+    </script>
+    <!-- Footer Section -->
+     <footer class="text-center mt-5 py-3" style="background-color: #003366; color: white;">
+    <p>© NIC Sikkim 2019 Developed and hosted by National Informatics Centre, Ministry of Electronics & Information Technology, Government of India</p>
+    <p>Last Updated: Jan 22, 2025</p>
+  </footer>
+
+
+    <!-- Bootstrap and jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
